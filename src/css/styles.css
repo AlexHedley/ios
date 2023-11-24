@@ -1,0 +1,48 @@
+body {
+    background-color: white;
+}
+
+h1 {
+    color: black;
+}
+
+.container {
+    /* max-width: 1140px; */
+    max-width: 1500px;
+}
+
+/* Buttons */
+
+.btn-warning, .btn-warning:hover {
+    color: #C20011;
+}
+
+/* Carousel */
+
+.carousel-caption {
+    color: black;
+    background-color: rgb(255, 255, 255, 0.6); /*white;*/
+}
+
+/* .carousel-control-next-icon, .carousel-control-prev-icon {
+    color: red;
+    background-color: red;
+} */
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+    background-image: none;
+}
+
+.carousel-control-prev-icon:after, .carousel-control-next-icon:after {     
+    content: "\f053";
+    font-family: 'Font Awesome 5 Free', sans-serif;
+}
+
+.carousel-control-next-icon:after {
+    content: "\f054";
+}
+
+.card-pill-primary {
+    color: #fff;
+    background-color: #000;
+}

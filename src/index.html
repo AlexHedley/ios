@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <meta name="description" content="iOS Apps">
+    <meta name="keywords" content="ios, apps, app, obj-c, apple">
+    <meta name="author" content="Alex Hedley">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="css/vendor/sticky-footer.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="css/jquery-ui.min.css"> -->
+    <link rel="stylesheet" href="css/vendor/jquery-ui.1.12.1.min.css">
+    <link rel="stylesheet" href="css/vendor/pivot.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/pivottable/2.13.0/pivot.min.css"> -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <!-- Fonts -->
+    <!-- <link href='https://fonts.googleapis.com/css?family=Orbitron' rel='stylesheet' type='text/css'> -->
+
+    <title>iOS Apps</title>
+  </head>
+  <body ng-app="app">
+    <main role="main" class="container">
+
+        <section class="jumbotron title-container text-center">
+            <div>
+                <h1>iOS Apps</h1>
+
+                <div class="row justify-content-md-center">
+                    <div class="col-lg-8">
+                        <div class="input-group search-bar">
+                            <input type="text" class="form-control" ng-model='searchText' placeholder="Search for an app..." aria-label="Search">
+                            <button type="submit" class="btn btn-default"><i class="fa fa-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div ng-controller="controller">
+
+            <div class="container">
+
+                <div class="row justify-content-md-center">
+                    <div class="">
+
+                        <table id="results" class="sortable">
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Name</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="app in apps">
+                                    <td></td>
+                                    <td><a ng-href="{{app.details}}.html">{{app.name}}</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="row justify-content-md-center">
+                    <div class="">
+
+                        <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                            <ol class="carousel-indicators">
+                                <li ng-repeat="set in sets" data-target="#carouselExampleCaptions" data-slide-to="{{$index}}"></li>
+                            </ol>
+                            <div class="carousel-inner">
+                                <div ng-repeat="app in apps" class="carousel-item" ng-class='{active:$first}'>
+                                    <img src="/ios/{{app.image}}" class="d-block w-100" alt="{{app.name}}">
+                                    <div class="carousel-caption d-none d-md-block">
+                                        <h5>{{app.name}}</h5>
+                                        <p>{{app.description}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+
+                <br />
+
+                <div class="row">
+                    <div 
+                        ng-repeat="app in apps | filter:searchText"
+                        class="col-md-3"
+                        style="margin-bottom: 50px;"
+                    >
+                        <div class="card" style="width: 18rem;" data-id="{{app.id}}">
+                            <img ng-if="app.image.length > 0" ng-src="/ios/{{app.image}}" class="card-img-top" alt="{{app.name}}">
+                            <div class="card-header">
+                                <a ng-href="{{app.details}}.html">{{app.name}}</a>
+                            </div>
+
+                            <div class="card-body">
+                                <p class="card-text">{{app.description}}</p>
+                                
+                                <div class="card-topics-container">
+                                    <div ng-repeat="tag in app.tags">
+                                        <span class="badge badge-pill card-pill-primary" style="margin-left:5px;">{{tag}}</span>
+                                    </div>
+                                </div>
+
+                                <br />
+
+                                <div class="btn-group">
+                                    <button ng-if="app.code.length > 0" ng-click="openRepository(app)" type="button" class="btn btn-sm btn-outline-secondary card-button">
+                                        <i class="fab fa-github"></i> Code
+                                    </button>
+                                    <button ng-if="app.site.length > 0" ng-click="openSite(app)" type="button" class="btn btn-sm btn-outline-secondary card-button">
+                                        <i class="fas fa-globe-europe"></i> Site
+                                    </button>
+                                    <button ng-if="app.appSite.length > 0" ng-click="openAppSite(app)" type="button" class="btn btn-sm btn-outline-secondary card-button">
+                                        <i class="fas fa-mobile-alt"></i> App Site
+                                    </button>
+                                </div>
+
+                            </div>
+
+                            <div class="card-footer text-muted">
+                                {{app.date | toDate | date:'mediumDate'}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted"><a href="https://alexhedley.github.io/" target="_blank">Alex Hedley</a>.</span>
+        </div>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="js/vendor/jquery-3.3.1.min.js" ></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-slim.min.js"><\/script>')</script>
+    <script src="js/vendor/jquery-ui.min.js"></script>
+    <!-- <script src="js/vendor/jquery-ui.1.12.1.min.js"></script> -->
+    <!-- <script src="js/vendor/popper.min.js"></script> -->
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <!-- <script src="js/vendor/jquery.pretty-text-diff.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script> -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.5/angular.min.js"></script> -->
+    <script src="js/vendor/angular.min.js"></script>
+    <!-- <script src="js/vendor/angular-filter.js"></script> -->
+    <script src="js/vendor/sorttable.js"></script>
+    <script src="js/app.js"></script>
+    </body>
+</html>
