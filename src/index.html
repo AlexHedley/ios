@@ -145,6 +145,57 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col">
+                        <h2>Work</h2>
+                    </div>
+                </div>
+
+                <!-- Make this a component -->
+                <div class="row">
+                    <div 
+                        ng-repeat="app in work | filter:searchText"
+                        class="col-md-3"
+                        style="margin-bottom: 50px;"
+                    >
+                        <div class="card" style="width: 18rem;" data-id="{{app.id}}">
+                            <img ng-if="app.image.length > 0" ng-src="/ios/{{app.image}}" class="card-img-top" alt="{{app.name}}">
+                            <div class="card-header">
+                                <a ng-href="{{app.details}}.html">{{app.name}}</a>
+                            </div>
+
+                            <div class="card-body">
+                                <p class="card-text">{{app.description}}</p>
+                                
+                                <div class="card-topics-container">
+                                    <div ng-repeat="tag in app.tags">
+                                        <span class="badge badge-pill card-pill-primary" style="margin-left:5px;">{{tag}}</span>
+                                    </div>
+                                </div>
+
+                                <br />
+
+                                <div class="btn-group">
+                                    <button ng-if="app.code.length > 0" ng-click="openRepository(app)" type="button" class="btn btn-sm btn-outline-secondary card-button">
+                                        <i class="fab fa-github"></i> Code
+                                    </button>
+                                    <button ng-if="app.site.length > 0" ng-click="openSite(app)" type="button" class="btn btn-sm btn-outline-secondary card-button">
+                                        <i class="fas fa-globe-europe"></i> Site
+                                    </button>
+                                    <button ng-if="app.appSite.length > 0" ng-click="openAppSite(app)" type="button" class="btn btn-sm btn-outline-secondary card-button">
+                                        <i class="fas fa-mobile-alt"></i> App Site
+                                    </button>
+                                </div>
+
+                            </div>
+
+                            <div class="card-footer text-muted">
+                                {{app.date | toDate | date:'mediumDate'}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </div>

@@ -2,6 +2,7 @@ var app = angular.module('app', []);
 app.controller('controller', function ($scope, $http, $q, $filter) {
 
     $scope.apps = [];
+    $scope.work = [];
 
     $scope.init = function () {
         getData();
@@ -13,6 +14,7 @@ app.controller('controller', function ($scope, $http, $q, $filter) {
         $http.get(file)
             .then(function(response) {
                 $scope.apps = response.data.apps;
+                $scope.work = response.data.work;
             });
     };
 
