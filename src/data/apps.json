@@ -149,6 +149,19 @@
             "blog": "",
             "tags": ["iOS", "Obj-C"],
             "appSite": ""
+        },
+        {
+            "id": 13,
+            "name": "ChamboulDé!",
+            "details": "chamboulde",
+            "date": "2020-11-14",
+            "description": "The first game with the new dice Dy that fit wonderfully well in your hand! Consisting of 5 dice D4 handmade with exotic wood.",
+            "image": "",
+            "site": "https://alexhedley.com/ChamboulDe-Web/",
+            "code": "https://github.com/AlexHedley/ChamboulDeApp/",
+            "blog": "",
+            "tags": ["iOS", "Android", "Xamarin", ".NET", "C#"],
+            "appSite": ""
         }
     ],
     "work": [
